@@ -47,7 +47,30 @@ class TicTacToe(App):
 
     # Checks winner after every move...
     def check_winner(self):
-        pass # Just void..
+        if (self.board[0].text == self.board[1].text == self.board[2].text == "X" or
+            self.board[3].text == self.board[4].text == self.board[5].text == "X" or
+            self.board[6].text == self.board[7].text == self.board[8].text == "X" or
+            self.board[0].text == self.board[3].text == self.board[6].text == "X" or
+            self.board[1].text == self.board[4].text == self.board[7].text == "X" or
+            self.board[2].text == self.board[5].text == self.board[8].text == "X" or
+            self.board[0].text == self.board[4].text == self.board[8].text == "X" or
+            self.board[2].text == self.board[4].text == self.board[6].text == "X"):
+            popup = Popup(title="Game OVER", content=Label(text="X player WON"), size=(300, 100),
+                                       size_hint=(None, None))
+
+            popup.open()
+
+        elif (self.board[0].text == self.board[1].text == self.board[2].text == "O" or
+              self.board[3].text == self.board[4].text == self.board[5].text == "O" or
+              self.board[6].text == self.board[7].text == self.board[8].text == "O" or
+              self.board[0].text == self.board[3].text == self.board[6].text == "O" or
+              self.board[1].text == self.board[4].text == self.board[7].text == "O" or
+              self.board[2].text == self.board[5].text == self.board[8].text == "O" or
+              self.board[0].text == self.board[4].text == self.board[8].text == "O" or
+              self.board[2].text == self.board[4].text == self.board[6].text == "O"):
+                 popup = Popup(title="GAME OVER", content=Label(text="O player WON"), size=(300, 100),
+                               size_hint=(None, None))
+                 popup.open()
 
     def popup_message(self, msg):
         popup = Popup(title="Welcome!", content=Label(text=msg), size=(300, 100), size_hint=(None, None))
