@@ -6,6 +6,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.config import Config
 from ai import Ai
 from random import randint
+import time
 
 class TicTacToe(App):
 
