@@ -42,7 +42,7 @@ class TicTacToe(App):
     # Initializes players
     def init_players(self):
         rand_choice = randint(0,1);
-        self.bot = Ai(self.choices[rand_choice]);
+        self.bot = Ai(self.choices[rand_choice], abs(rand_choice - 1));
         self.player = self.choices[0] if rand_choice == 1 else self.choices[1]
 
     # Checks winner after every move...
