@@ -37,8 +37,9 @@ class TicTacToe(App):
     def btn_pressed(self, button):
         if len(button.text.strip()) < 1: # Continue only if the button has no mark on it...
             button.text = self.player
-            self.bot.make_move(self.board)
             self.check_winner()
+            self.bot.make_move(self.board)
+
 
     # Initializes players
     def init_players(self):

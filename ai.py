@@ -50,9 +50,9 @@ class Ai:
     def cvtBoard(self, buttons):
         finalBaord = []
         for b in buttons:
-            print b
+            print (b)
             finalBaord.append([int(b.id), b.text])
-            print finalBaord
+            print (finalBaord)
         return finalBaord
 
     def check_winner(self, board):
