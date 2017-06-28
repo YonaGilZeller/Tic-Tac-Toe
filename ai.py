@@ -1,4 +1,5 @@
 from random import randint
+from audioop import minmax, findmax
 
 class Ai:
     def __init__(self, choice, op):
@@ -32,25 +33,50 @@ class Ai:
 
     def calculateMove(self, board):
         vb = board
+        min = self.findMin(vb)
+        vb[min[0]] = min[1]
+        self.findMax(vb)
+          
+    def findMin(self, board):
+        OBoard = board          #original board
+        vb = board
         free_buttons = self.getFreeButtons(vb)
+        avlMoves = []
+        for b in free_buttons: 
+            vb = OBoard
+            free_buttons = self.getFreeButtons(vb)
+            vb[b[0]][1] = self.op
+            avlMoves.append([self.boardScore(vb), b])
+        
+        final = [0, None]
+        for m in avlMoves:
+            if m[0] < final[0]:
+                final = m
+                
+        return final[1]
+                       
+    
+    def findMax(self, board):
+        vb = board
+        free_buttons = self.getFreeButtons(vb)
+        avlMoves = []
         for b in free_buttons: 
             vb = board
             free_buttons = self.getFreeButtons(vb)
             vb[b[0]][1] = self.choice
-            if self.check_winner(vb) == self.choice:
-                return b
-
-            else:
-                return self.calculateMove(vb) 
-            '''
-            elif self.check_winner(vb) == self.op:
-                pass
-            '''
+            avlMoves.append([self.boardScore(vb), b])
+        
+        final = [0, None]
+        for m in avlMoves:
+            if m[0] > final[0]:
+                final = m
+                
+        return final[1]
             
     def cvtBoard(self, buttons):
         finalBaord = []
         for b in buttons:
-            print b
+            #print b
             finalBaord.append([int(b.id), b.text])
             print finalBaord
         return finalBaord
@@ -77,3 +103,12 @@ class Ai:
                 return 'O'
         else:
             return 'n'
+        
+    def boardScore(self, board):
+        if self.check_winner(board) == self.op:
+            return -1
+        elif self.check_winner(board) == self.choice:
+            return 1
+        else:
+            return 0
+    
